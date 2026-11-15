@@ -1,0 +1,57 @@
+{
+  "base45": {
+    "bytes_hex": "416964547261636521",
+    "text": "5C8YUCVKEKPCX0"
+  },
+  "qr": {
+    "signing_keys": {
+      "1": "79b5562e8fe654f94078b112e8a98ba7901f853ae695bed7e0e3910bad049664"
+    },
+    "code": "W50000162100JIGRB0W37.NAPF67465H0/B1C9IZX0VLKY7O:2TN$E%XP MI12V+.NG9CDB8BCC0-BCYJ34DD/J6/6EAJDSLCM9FBBT LSIIT H 1NIRTMSQYNSD0FC-3ABQ1/OG83 AW",
+    "shipment_id": 4321,
+    "scan_point_id": 98765,
+    "kind": "final_distribution",
+    "expiry": "2027-03-01",
+    "dest": "SO2201",
+    "manifest": [
+      [
+        2,
+        10
+      ],
+      [
+        3,
+        400
+      ],
+      [
+        5,
+        70000
+      ]
+    ]
+  },
+  "box": {
+    "private_hex": "2122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f40",
+    "public_hex": "5869aff450549732cbaaed5e5df9b30a6da31cb0e5742bad5ad4a1a768f1a67b"
+  },
+  "sms": {
+    "key_hex": "6465666768696a6b6c6d6e6f70717273",
+    "input": {
+      "sms_id": 513,
+      "shipment_id": 4321,
+      "scan_point_id": 98765,
+      "total_qty": 410,
+      "flags": 1,
+      "pin": "2468",
+      "minutes": 458520,
+      "at": "2026-11-15T10:00:00Z"
+    },
+    "code": "X50$509BW.SC9KK7PS.3N5-CG3HPIAPQT+TF",
+    "code_duress": "X50$509BW.SC9KK7PS.3NT+CIENWLP9YA4F6"
+  },
+  "buckets": [
+    2048,
+    8192,
+    32768,
+    163840
+  ],
+  "pin_pad": 12
+}

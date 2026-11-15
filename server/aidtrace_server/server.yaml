@@ -1,0 +1,75 @@
+# Server configuration (non-secret). Secrets and paths come from environment variables (settings.py).
+
+# SRP item catalogue. `code` is the 1-byte item code used in QR manifests.
+catalogue:
+  - {code: 1, key: emergency_health_kit, label: "Emergency health kit"}
+  - {code: 2, key: cholera_kit, label: "Cholera kit"}
+  - {code: 3, key: sam_supplies, label: "SAM medical supplies"}
+  - {code: 4, key: essential_medicines, label: "Essential medicines"}
+  - {code: 5, key: vaccines, label: "Vaccines", cold_chain: true}
+  - {code: 6, key: nutrition_commodities, label: "Nutrition commodities"}
+  - {code: 9, key: other, label: "Other"}
+
+low_profile_flags: [unbranded_packaging, split_consignment, varied_day_route, smaller_more_frequent, prepositioned]
+
+scan_point_kinds: [dispatch, handover, final_distribution]
+
+field_report_types: [diversion, extortion_at_handover, theft_in_transit, violence_near_site, access_denied, other]
+recipient_problem_types: [shortage, theft, payment_demand, access_blocked, other]
+
+roles: [hq_admin, security_focal_point, field_staff]
+roles_see_duress: [hq_admin, security_focal_point]
+roles_see_report_text: [hq_admin, security_focal_point]
+
+# ACLED display gate (brief §2.2). Level is read from the pipeline config (acled_display);
+# these are the roles allowed at each level. Recipients and unauthenticated users: never.
+acled_roles:
+  aggregated: [hq_admin, security_focal_point, field_staff]
+  event_level: [hq_admin, security_focal_point]
+acled_attribution: "Armed Conflict Location & Event Data (ACLED); www.acleddata.com"
+
+# Priority view (brief §5.4): bands counted as "higher risk".
+higher_risk_bands: [high, severe]
+access_reports_90d: 3                     # SRP §7 access-deterioration trigger from field reports (confirm)
+two_person_bands: [high, severe]          # destinations requiring two-person confirmation
+min_scan_points_high_risk: 2
+
+flags:
+  outside_window_days: 3
+  near_expiry_days: 90
+  vvm_fail_stage: 3                       # vaccine vial monitor stage 3-4 = discard
+
+receipt:
+  pin_pad_length: 12                      # PIN field is padded to fixed width before sealing
+  buckets: [2048, 8192, 32768, 163840]    # sealed plaintext sizes (bytes)
+  max_age_days: 60                        # oldest acceptable device timestamp (offline queue)
+  qr_valid_days: 120
+
+# Independent verification queue (brief §6.2): share of confirmed deliveries drawn at random.
+verification:
+  base_rate: 0.10
+  high_risk_rate: 0.30          # destinations in two_person_bands
+
+# Consumption reconciliation (docs/RECONCILIATION.md). PROVISIONAL ratios: confirm with programme staff.
+# expected units of item consumed per unit of service metric.
+reconciliation:
+  window_months: 3
+  excess_multiple: 1.5          # flag if delivered > 1.5 x expected over the window
+  min_expected: 1               # skip sites with negligible expected use
+  ratios:
+    - {item_code: 3, metric: sam_admissions, per_unit: 1.0, note: "1 SAM supply unit (e.g. RUTF carton) per admission"}
+    - {item_code: 2, metric: cholera_cases_treated, per_unit: 0.01, note: "1 cholera kit per 100 cases"}
+    - {item_code: 5, metric: vaccinations_given, per_unit: 1.0, note: "1 dose per vaccination (adjust for vial size/wastage)"}
+
+sms:
+  number: "+000 0000 0000 (configure)"   # number recipients text receipt codes to (gateway inbound)
+
+pseah_contacts:                           # shown in the recipient app (survivor-centred channel)
+  SOM: {name: "PSEAH focal point (placeholder)", phone: "+000 000 000", note: "Confidential. Configure before use."}
+  KEN: {name: "PSEAH focal point (placeholder)", phone: "+000 000 000", note: "Confidential. Configure before use."}
+  SSD: {name: "PSEAH focal point (placeholder)", phone: "+000 000 000", note: "Confidential. Configure before use."}
+  SDN: {name: "PSEAH focal point (placeholder)", phone: "+000 000 000", note: "Confidential. Configure before use."}
+  DJI: {name: "PSEAH focal point (placeholder)", phone: "+000 000 000", note: "Confidential. Configure before use."}
+  ETH: {name: "PSEAH focal point (placeholder)", phone: "+000 000 000", note: "Confidential. Configure before use."}
+
+disclaimer: "Risk scores are estimates based on recorded data and may be out of date. They inform how aid is delivered, never whether."

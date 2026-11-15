@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aidtrace-pipeline"
+version = "0.1.0"
+description = "AidTrace data pipeline: ingestion, admin-2 x month panel, risk model inputs"
+requires-python = ">=3.11"
+# Versions pinned for this machine's Application Control policy (see DECISIONS.md)
+dependencies = [
+  "pandas==2.2.3",
+  "numpy<2.3",
+  "pyogrio==0.10.0",
+  "geopandas",
+  "shapely>=2",
+  "pyproj",
+  "pyarrow",
+  "openpyxl",
+  "pyyaml",
+  "scikit-learn",
+  "lightgbm",
+  "matplotlib",
+]
+
+[project.optional-dependencies]
+test = ["pytest"]
+
+[tool.setuptools.packages.find]
+include = ["aidtrace_pipeline*"]
+
+[tool.setuptools.package-data]
+aidtrace_pipeline = ["*.yaml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

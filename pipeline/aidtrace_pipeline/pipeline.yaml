@@ -1,0 +1,180 @@
+# AidTrace pipeline configuration. SRP-specific content lives here, not in code.
+
+panel:
+  start_month: "2017-01"
+  # "auto" = last complete calendar month before the run date, capped at the latest
+  # month observed in any source.
+  end_month: auto
+
+use_acled: true          # USE_ACLED env var overrides
+acled_display: none      # none | aggregated | event_level (see DECISIONS.md: no written permission on file)
+
+equal_area_crs: "ESRI:102022"   # Africa Albers Equal Area Conic
+
+# Countries in the SRP. iso2 matches FEWS NET country_code; names match UCDP/ACLED.
+countries:
+  SOM:
+    iso2: SO
+    name: Somalia
+    ucdp_names: ["Somalia"]
+    acled_names: ["Somalia"]
+    cod_ab_zip: data/raw/cod_ab/som/som_admin_boundaries.shp.zip
+    cod_ab_layer: som_admin2.shp
+    # Modelling-unit merges: every admin-2 whose adm1_pcode is listed collapses into one unit
+    # named after that adm1 p-code. Banadir (Mogadishu): see DECISIONS.md 2026-11-14.
+    merge_adm1_to_unit: ["SO22"]
+    # Admin-2 polygons that lack a p-code get a synthetic code (for delivery records).
+    synthetic_pcodes:
+      - {adm1_pcode: SO22, adm2_name: Unspecified, pcode: SO22XX}
+    dtm_file: data/raw/iom_dtm/IOM_DTM_ETT_SOM_Tracker_sinceJune2026_w19.xlsx
+    dtm_schema: som_ett
+  # Boundary vintages: see DECISIONS.md. ucdp_extra_names: events recorded under another country
+  # name that may fall inside this country's polygons (assigned spatially only).
+  DJI:
+    iso2: DJ
+    name: Djibouti
+    ucdp_names: ["Djibouti"]
+    acled_names: ["Djibouti"]
+    cod_ab_zip: data/raw/cod_ab/dji/dji_adm_gadm_2022_SHP.zip
+    cod_ab_layer: dji_admbnda_gadm_adm2_2022.shp
+  ETH:
+    iso2: ET
+    name: Ethiopia
+    ucdp_names: ["Ethiopia"]
+    acled_names: ["Ethiopia"]
+    cod_ab_zip: data/raw/cod_ab/eth/eth_admin_boundaries.shp.zip
+    cod_ab_layer: eth_admin2.shp
+  KEN:
+    iso2: KE
+    name: Kenya
+    ucdp_names: ["Kenya"]
+    acled_names: ["Kenya"]
+    cod_ab_zip: data/raw/cod_ab/ken/ken_admin_boundaries.shp.zip
+    cod_ab_layer: ken_admin2.shp
+    # data/raw/iom_dtm/Kenya_Displacement_*.xlsx has names only (no p-codes): not joined (no name joins).
+  SSD:
+    iso2: SS
+    name: South Sudan
+    ucdp_names: ["South Sudan"]
+    ucdp_extra_names: ["Sudan"]          # pre-July-2011 events in today's South Sudan are coded "Sudan"
+    acled_names: ["South Sudan"]
+    cod_ab_zip: data/raw/cod_ab/ssd/ssd_admin_boundaries.shp.zip
+    cod_ab_layer: ssd_admin2.shp
+    dtm_file: data/raw/iom_dtm/IOM_DTM_SSD_EventTracking_Dataset_Jan-Sep 2026_20261021.xlsx
+    dtm_schema: ssd_et
+  SDN:
+    iso2: SD
+    name: Sudan
+    ucdp_names: ["Sudan"]
+    acled_names: ["Sudan"]
+    cod_ab_zip: data/raw/cod_ab/sdn/sdn_admin_boundaries.shp.zip
+    cod_ab_layer: sdn_admin2.shp
+
+# Static district attributes (static.py): exposure, settlement, historical interstate disputes.
+static:
+  decimate: 5                          # 3-arcsec rasters summed to ~500 m for zonal totals and weight grids
+  worldpop_agesex:                     # WorldPop age/sex population (2020)
+    KEN: {dir: data/raw/worldpop/ken_agesex, prefix: KEN_population_v2_0_agesex}
+    SSD: {dir: data/raw/worldpop/ssd_agesex, prefix: SSD_population_v2_0_agesex}
+  buildings:                           # WorldPop gridded building patterns v1.1 (CC BY-SA 4.0)
+    SOM: {dir: data/raw/worldpop/som_buildings, prefix: SOM_buildings_v1_1}
+  urban_extents:
+    SOM: data/raw/worldpop/som_urban_extents/SOM_SocialDistancing_v1_0_urban_extents.shp
+  urban_points:
+    SOM: data/raw/worldpop/som_urban_extents/SOM_SocialDistancing_v1_0_urban_points.shp
+  midloc_incidents: data/raw/cow/midloc_2_1/MIDLOCI_2.1.csv
+  nmc_zip: data/raw/cow/nmc_v7/NMC-v7-abridged.zip
+  nmc_abb: {SOM: SOM, KEN: KEN, SSD: SSD, SDN: SUD, DJI: DJI, ETH: ETH}   # COW state abbreviations
+
+ucdp:
+  ged_zip: data/raw/ucdp/ged261-csv.zip
+  # where_prec: 1 exact, 2 within ~25 km, 3 admin-2 level, 4 admin-1 level,
+  # 5 linear feature / between locations, 6 country, 7 international waters (UCDP GED codebook)
+  max_where_prec_for_district: 3
+
+acled:
+  dir: data/restricted/acled
+  # geo_precision: 1 exact town, 2 near / part of region, 3 larger region (ACLED codebook)
+  max_geo_precision_for_district: 2
+
+# Point-to-polygon: points that fall just outside any unit (coastline generalisation) are
+# snapped to the nearest unit if within this distance.
+snap_distance_m: 5000
+
+fewsnet:
+  dir: data/raw/fewsnet
+  # A phase must cover at least this share of a unit's area to count towards ipc_*_max
+  # (suppresses slivers from boundary mismatches).
+  min_area_share_for_max: 0.05
+
+wfp:
+  files: [data/raw/wfp_prices/wfp_food_prices_global_2025.csv, data/raw/wfp_prices/wfp_food_prices_global_2026.csv]
+  staple_categories: ["cereals and tubers", "oil and fats", "pulses and nuts"]
+  baseline_months: 12
+  baseline_min_obs: 6
+
+model:
+  horizons: [1, 3]                 # months ahead
+  train_origin_start: "2017-01"    # aligned with the panel
+  test_years: [2021, 2022, 2023, 2024, 2025]   # expanding-window folds (by target month)
+  alert_rate: 0.20                 # precision/recall reported at this share of unit-months flagged
+  bootstrap_reps: 200              # unit-cluster bootstrap for metric CIs
+  ensemble_size: 20                # bagged LightGBM members for score intervals
+  scoring: pooled                  # pooled (six-country model; see MODEL_REPORT.md) | per_country
+  interval: [0.05, 0.95]
+  lightgbm:
+    n_estimators: 300
+    learning_rate: 0.03
+    num_leaves: 15
+    min_child_samples: 40
+    subsample: 0.8
+    subsample_freq: 1
+    colsample_bytree: 0.8
+    reg_lambda: 1.0
+    verbose: -1
+  # Risk bands on P(>=1 fatal UCDP event in target month). PROVISIONAL: flag for owner review.
+  bands:
+    - {name: low, max: 0.10}
+    - {name: elevated, max: 0.30}
+    - {name: high, max: 0.60}
+    - {name: severe, max: 1.01}
+  acled_test_months: ["2025-03", "2025-12"]   # rolling-origin window for the with/without-ACLED comparison
+
+# Need index (brief §5.1): documented weights, renormalised over available components.
+need:
+  carry_forward_months: 12          # how long an observation stays "current" for the index
+  weights:                          # SRP §4.3 prioritisation criteria
+    ipc_phase: 0.25
+    ipc_p3plus: 0.10
+    malnutrition: 0.20              # IPC AMN / GAM / SAM   (no data yet)
+    outbreaks: 0.10                 # active outbreak alerts (no data yet)
+    facility_functionality: 0.10    # HeRAMS                (no data yet)
+    displacement: 0.10
+    immunisation: 0.05              # measles coverage      (no data yet)
+    wash: 0.04                      #                       (no data yet)
+    rainfall_anomaly: 0.02          # CHIRPS                (no data yet)
+    flood_hazard: 0.02              #                       (no data yet)
+    price_anomaly: 0.02
+  scaling:
+    price_anom_full: 0.5            # log price anomaly that scores 1.0
+    displacement_full: 10000        # monthly arrivals that score 1.0 (log scale; no population data)
+    displacement_per_1000_full: 20  # monthly arrivals per 1,000 residents that score 1.0 (with population)
+  high_need:                        # "high need" for the 2x2 priority view
+    ipc_phase_min: 3                # SRP eligibility gate: IPC Phase 3-5
+    index_min: 0.5
+
+# SRP §7 operational triggers. Thresholds are starting points for owner confirmation (docs/TRIGGERS.md).
+triggers:
+  ipc_deterioration: {lookback_months: 24}
+  ipc_phase45: {min_phase: 4}
+  displacement_large: {arrivals_month: 5000, conflict_arrivals_month: 2000}
+  gam_emergency: {gam_pct: 15.0, sam_pct: 2.0}
+  mortality: {cmr_per10k_day: 1.0, u5mr_per10k_day: 2.0}
+  access_deterioration: {field_reports_90d: 3}        # evaluated by the server from field reports
+  climate_shock: {rain_anom_z: 2.0}
+  outbreak: {}
+  facility_functionality: {drop_pct: 20}
+
+views:
+  pgm_file: data/raw/views/fatalities003_2026_09_t01_pgm.csv
+  issued: "2026-09"

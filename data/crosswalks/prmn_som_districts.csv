@@ -1,0 +1,80 @@
+prmn_region,prmn_district,adm2_pcode,adm2_name,adm1_name,match,reviewed
+0,0,,,,invalid name in source: exclude,no
+Awdal,Baki,SO1102,Baki,Awdal,exact name within region,yes
+Awdal,Borama,SO1101,Borama,Awdal,exact name within region,yes
+Awdal,Lughaye,SO1103,Lughaye,Awdal,exact name within region,yes
+Awdal,Zeylac,SO1104,Zeylac,Awdal,exact name within region,yes
+Bakool,Ceel Barde,SO2502,Ceel Barde,Bakool,exact name within region,yes
+Bakool,Rab Dhuure,SO2505,Rab Dhuure,Bakool,exact name within region,yes
+Bakool,Tayeeglow,SO2503,Tayeeglow,Bakool,exact name within region,yes
+Bakool,Waajid,SO2504,Waajid,Bakool,exact name within region,yes
+Bakool,Xudur,SO2501,Xudur,Bakool,exact name within region,yes
+Banadir,Banadir,SO22XX,Unspecified,Banadir,SPELLING VARIANT suggested: check,yes
+Bari,Bandarbeyla,SO1602,Bandarbeyla,Bari,exact name within region,yes
+Bari,Bossaso,SO1601,Bossaso,Bari,exact name within region,yes
+Bari,Caluula,SO1603,Caluula,Bari,exact name within region,yes
+Bari,Iskushuban,SO1604,Iskushuban,Bari,exact name within region,yes
+Bari,Qandala,SO1605,Qandala,Bari,exact name within region,yes
+Bari,Qardho,SO1606,Qardho,Bari,exact name within region,yes
+Bay,Baidoa,SO2401,Baydhaba,Bay,SPELLING VARIANT suggested: check,yes
+Bay,Buur Hakaba,SO2402,Buur Hakaba,Bay,exact name within region,yes
+Bay,Diinsoor,SO2403,Diinsoor,Bay,exact name within region,yes
+Bay,Qansax Dheere,SO2404,Qansax Dheere,Bay,exact name within region,yes
+Galgaduud,Cabudwaaq,SO1902,Cabudwaaq,Galgaduud,exact name within region,yes
+Galgaduud,Cadaado,SO1903,Cadaado,Galgaduud,exact name within region,yes
+Galgaduud,Ceel Buur,SO1904,Ceel Buur,Galgaduud,exact name within region,yes
+Galgaduud,Ceel Dheer,SO1905,Ceel Dheer,Galgaduud,exact name within region,yes
+Galgaduud,Dhuusamarreeb,SO1901,Dhuusamarreeb,Galgaduud,exact name within region,yes
+Gedo,Baardheere,SO2602,Baardheere,Gedo,exact name within region,yes
+Gedo,Belet Xaawo,SO2603,Belet Xaawo,Gedo,exact name within region,yes
+Gedo,Ceel Waaq,SO2604,Ceel Waaq,Gedo,exact name within region,yes
+Gedo,Doolow,SO2605,Doolow,Gedo,exact name within region,yes
+Gedo,Garbahaarey,SO2601,Garbahaarey,Gedo,exact name within region,yes
+Gedo,Luuq,SO2606,Luuq,Gedo,exact name within region,yes
+Hiraan,Belet Weyne,SO2001,Belet Weyne,Hiraan,exact name within region,yes
+Hiraan,Bulo Burto,SO2002,Bulo Burto,Hiraan,exact name within region,yes
+Hiraan,Jalalaqsi,SO2003,Jalalaqsi,Hiraan,exact name within region,yes
+Lower Juba,Afmadow,SO2802,Afmadow,Lower Juba,exact name within region,yes
+Lower Juba,Badhaadhe,SO2803,Badhaadhe,Lower Juba,exact name within region,yes
+Lower Juba,Jamaame,SO2804,Jamaame,Lower Juba,exact name within region,yes
+Lower Juba,Kismayo,SO2801,Kismaayo,Lower Juba,SPELLING VARIANT suggested: check,yes
+Lower Shabelle,Afgooye,SO2302,Afgooye,Lower Shabelle,exact name within region,yes
+Lower Shabelle,Baraawe,SO2303,Baraawe,Lower Shabelle,exact name within region,yes
+Lower Shabelle,Kurtunwaarey,SO2304,Kurtunwaarey,Lower Shabelle,exact name within region,yes
+Lower Shabelle,Marka,SO2301,Marka,Lower Shabelle,exact name within region,yes
+Lower Shabelle,Qoryooley,SO2305,Qoryooley,Lower Shabelle,exact name within region,yes
+Lower Shabelle,Sablaale,SO2306,Sablaale,Lower Shabelle,exact name within region,yes
+Lower Shabelle,Wanla Weyn,SO2307,Wanla Weyn,Lower Shabelle,exact name within region,yes
+Middle Juba,Bu'aale,SO2701,Bu'aale,Middle Juba,exact name within region,yes
+Middle Juba,Jilib,SO2702,Jilib,Middle Juba,exact name within region,yes
+Middle Juba,Saakow,SO2703,Saakow,Middle Juba,exact name within region,yes
+Middle Shabelle,Adan Yabaal,SO2102,Adan Yabaal,Middle Shabelle,exact name within region,yes
+Middle Shabelle,Balcad,SO2103,Balcad,Middle Shabelle,exact name within region,yes
+Middle Shabelle,Cadale,SO2104,Cadale,Middle Shabelle,exact name within region,yes
+Middle Shabelle,Jowhar,SO2101,Jowhar,Middle Shabelle,exact name within region,yes
+Mudug,Gaalkacyo,SO1801,Gaalkacyo,Mudug,exact name within region,yes
+Mudug,Galdogob,SO1802,Galdogob,Mudug,exact name within region,yes
+Mudug,Hobyo,SO1803,Hobyo,Mudug,exact name within region,yes
+Mudug,Jariiban,SO1804,Jariiban,Mudug,exact name within region,yes
+Mudug,Xarardheere,SO1805,Xarardheere,Mudug,exact name within region,yes
+Nugaal,Burtinle,SO1702,Burtinle,Nugaal,exact name within region,yes
+Nugaal,Eyl,SO1703,Eyl,Nugaal,exact name within region,yes
+Nugaal,Garoowe,SO1701,Garoowe,Nugaal,exact name within region,yes
+Nugaal,Qardho,SO1606,Qardho,Bari,"exact name, REGION DIFFERS: check",yes
+Sanaag,Badhan,,,,district not in COD-AB (formed after the boundary set): leave unreviewed or pick parent by hand,no
+Sanaag,Ceel Afweyn,SO1502,Ceel Afweyn,Sanaag,exact name within region,yes
+Sanaag,Ceerigaabo,SO1501,Ceerigaabo,Sanaag,exact name within region,yes
+Sanaag,Dhahar,,,,district not in COD-AB (formed after the boundary set): leave unreviewed or pick parent by hand,no
+Sanaag,Laasqoray,SO1503,Laasqoray,Sanaag,exact name within region,yes
+Sanaag,Lasqoray,SO1503,Laasqoray,Sanaag,SPELLING VARIANT suggested: check,yes
+Sool,Caynabo,SO1402,Caynabo,Sool,exact name within region,yes
+Sool,Laas Caanood,SO1401,Laas Caanood,Sool,exact name within region,yes
+Sool,Taleex,SO1403,Taleex,Sool,exact name within region,yes
+Sool,Xudun,SO1404,Xudun,Sool,exact name within region,yes
+Togdheer,Burco,SO1301,Burco,Togdheer,exact name within region,yes
+Togdheer,Buuhoodle,SO1302,Buuhoodle,Togdheer,exact name within region,yes
+Togdheer,Owdweyne,SO1303,Owdweyne,Togdheer,exact name within region,yes
+Togdheer,Sheikh,SO1304,Sheikh,Togdheer,exact name within region,yes
+Woqooyi Galbeed,Berbera,SO1202,Berbera,Woqooyi Galbeed,exact name within region,yes
+Woqooyi Galbeed,Gebiley,SO1203,Gebiley,Woqooyi Galbeed,exact name within region,yes
+Woqooyi Galbeed,Hargeysa,SO1201,Hargeysa,Woqooyi Galbeed,exact name within region,yes

@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aidtrace-server"
+version = "0.1.0"
+description = "AidTrace API: auth, shipments, signed QR, sealed-box receipts, risk API, field reports"
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi",
+  "uvicorn[standard]",
+  "sqlalchemy>=2",
+  "pydantic>=2",
+  "argon2-cffi",
+  "pynacl",
+  "httpx",
+  "python-multipart",
+  "segno",
+  "fpdf2",
+  "pyyaml",
+  "pandas==2.2.3",
+  "pyarrow",
+  "geopandas",
+]
+
+[project.optional-dependencies]
+test = ["pytest"]
+
+[project.scripts]
+aidtrace-server = "aidtrace_server.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["aidtrace_server*"]
+
+[tool.setuptools.package-data]
+aidtrace_server = ["*.yaml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

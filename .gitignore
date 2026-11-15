@@ -1,0 +1,12 @@
+data/restricted/
+data/raw/
+data/processed/
+data/holding/
+*.egg-info/
+.pytest_cache/
+*.env
+.env*
+keys/
+__pycache__/
+node_modules/
+dist/

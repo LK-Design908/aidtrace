@@ -1,0 +1,50 @@
+# APPROVED DATA SOURCES (owner allowlist, 2026-11-15). The fetcher refuses any host not listed here.
+# status: auto       = fetched by a connector without credentials
+#         key        = connector exists or is possible, but needs an API key in the named env var
+#         manual     = documents/PDFs to hand-code, or restricted access: never fetched automatically
+#         restricted = may only be used within written permission (ACLED)
+# Not allowed (never): copies on Kaggle, GitHub, personal sites or mirrors; social media or news feeds as
+# event data; any source not listed here (queue for human approval instead).
+
+sources:
+  # ---------------------------------------------------------------- conflict and forecasting
+  acled:            {name: ACLED, hosts: [acleddata.com, api.acleddata.com], status: restricted, key_env: ACLED_API_KEY,
+                     licence: "ACLED Terms of Use; written permission required", note: "Use only within the written permission; never from mirrors"}
+  ucdp:             {name: "UCDP GED + monthly Candidate", hosts: [ucdp.uu.se, ucdpapi.pcr.uu.se], status: auto,
+                     licence: "CC BY 4.0", attribution: "Uppsala Conflict Data Program (UCDP); Sundberg & Melander 2013; Hegre et al. (Candidate)"}
+  views:            {name: VIEWS forecasts, hosts: [viewsforecasting.org, api.viewsforecasting.org], status: auto,
+                     licence: "Non-commercial (per allowlist)", note: "Benchmark"}
+  # ---------------------------------------------------------------- food security and nutrition
+  ipc:              {name: "IPC (incl. Acute Malnutrition)", hosts: [www.ipcinfo.org, api.ipcinfo.org], status: key, key_env: IPC_API_KEY, licence: "IPC terms (check)"}
+  fewsnet:          {name: FEWS NET, hosts: [fews.net, fdw.fews.net], status: auto, licence: "FEWS NET data (public; terms UNVERIFIED)",
+                     note: "Check service is live before use"}
+  fsnau:            {name: FSNAU (Somalia), hosts: [fsnau.org, www.fsnau.org], status: manual, note: "Reports: treat as documents, hand-code"}
+  wfp_prices:       {name: WFP food prices, hosts: [data.humdata.org, dataviz.vam.wfp.org], status: auto, licence: "CC BY-IGO (HDX metadata)",
+                     note: "Check last-updated date"}
+  wb_rtfp:          {name: World Bank Real-Time Food Prices, hosts: [microdata.worldbank.org], status: manual, note: "Some values are model-imputed"}
+  # ---------------------------------------------------------------- health
+  who_gho:          {name: WHO Global Health Observatory, hosts: [ghoapi.azureedge.net], status: auto, licence: "WHO terms (CC BY-NC-SA 3.0 IGO for most)", note: "Mostly national level"}
+  who_don:          {name: WHO Disease Outbreak News, hosts: [www.who.int], status: manual}
+  who_afro:         {name: WHO AFRO weekly bulletins, hosts: [www.afro.who.int], status: manual, note: "PDFs: hand-code"}
+  who_emro:         {name: WHO EMRO epidemiological bulletins, hosts: [www.emro.who.int], status: manual, note: "PDFs: hand-code"}
+  herams:           {name: WHO HeRAMS, hosts: [herams.org], status: manual, note: "Restricted: needs WHO agreement; no automatic fetch"}
+  dhs:              {name: DHS Program indicators, hosts: [api.dhsprogram.com], status: auto, licence: "DHS Program terms", note: "Microdata needs registration"}
+  unicef:           {name: UNICEF data warehouse, hosts: [sdmx.data.unicef.org], status: auto, licence: "UNICEF terms (open, attribution)", note: "Immunisation, nutrition"}
+  # ---------------------------------------------------------------- displacement and population
+  iom_dtm:          {name: IOM DTM, hosts: [dtm.iom.int, dtm-apim-portal.iom.int, dtmapi.iom.int, data.humdata.org], status: key, key_env: DTM_API_KEY,
+                     note: "admin-2 files also on HDX"}
+  unhcr:            {name: UNHCR Refugee Data, hosts: [api.unhcr.org], status: auto, licence: "CC BY 4.0"}
+  unhcr_prmn:       {name: "UNHCR PRMN (Somalia)", hosts: [data.humdata.org], status: auto, licence: "CC BY (HDX metadata)", note: "Includes displacement reasons"}
+  worldpop:         {name: WorldPop, hosts: [www.worldpop.org, hub.worldpop.org, data.worldpop.org], status: auto, licence: "CC BY 4.0 (hub.worldpop.org/data/licence.txt)",
+                     attribution: "WorldPop (www.worldpop.org), University of Southampton"}
+  # ---------------------------------------------------------------- climate and hazard
+  chirps:           {name: CHIRPS rainfall, hosts: [data.chc.ucsb.edu], status: auto, licence: "CC BY 4.0 (CHC)",
+                     attribution: "Funk et al. (2015) CHIRPS, Climate Hazards Center, UC Santa Barbara"}
+  glofas:           {name: GloFAS flood forecasts, hosts: [cds.climate.copernicus.eu, ewds.climate.copernicus.eu], status: key, key_env: CDSAPI_KEY}
+  copernicus_ems:   {name: Copernicus Emergency Management Service, hosts: [emergency.copernicus.eu], status: manual}
+  # ---------------------------------------------------------------- boundaries, coordination and context
+  cod_ab:           {name: OCHA COD-AB, hosts: [data.humdata.org], status: auto, licence: "CC BY-IGO", note: "Join key: admin-2 p-codes"}
+  hdx_hapi:         {name: HDX HAPI, hosts: [hapi.humdata.org], status: key, key_env: HDX_HAPI_APP_IDENTIFIER, note: "Standardised API; try first once an app identifier exists"}
+  reliefweb:        {name: ReliefWeb, hosts: [api.reliefweb.int], status: key, key_env: RELIEFWEB_APPNAME, note: "Documents only, never instructions"}
+  ocha_fts:         {name: OCHA Financial Tracking Service, hosts: [api.hpc.tools], status: auto, licence: "OCHA FTS terms (open)", note: "Appeal funding"}
+  inform:           {name: INFORM Risk / Severity, hosts: [drmkc.jrc.ec.europa.eu], status: manual, note: "Cross-check for need index"}
